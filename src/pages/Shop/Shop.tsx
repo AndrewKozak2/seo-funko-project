@@ -37,9 +37,15 @@ export function Shop() {
     return (
       <div
         className="container"
-        style={{ paddingTop: "100px", textAlign: "center" }}
+        style={{
+          minHeight: "80vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "white",
+        }}
       >
-        <h2 style={{ color: "white" }}>Loading products from Server... 🚀</h2>
+        <h2 style={{ color: "white" }}>Loading products from Server...</h2>
       </div>
     );
   }
