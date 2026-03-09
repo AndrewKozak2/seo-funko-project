@@ -18,6 +18,7 @@ export function Checkout() {
     phone: "",
     address: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const cart = useCartStore((state) => state.cart);
   const clearCart = useCartStore((state) => state.clearCart);
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export function Checkout() {
     0,
   );
 
-  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (
@@ -38,16 +39,53 @@ export function Checkout() {
       toast.error("Please fill in all fields");
       return;
     }
-    toast.success("Order successfully placed!");
-    const orderNumber = Math.floor(100000 + Math.random() * 900000);
-    navigate("/success", {
-      state: {
-        orderId: `FNK-${orderNumber}`,
-        total: totalPrice.toFixed(2),
-      },
-    });
-    clearCart();
+
+    setIsSubmitting(true);
+
+    try {
+      const orderPayload = {
+        customer: formData,
+        items: cart.map((item) => ({
+          productId: item.product._id || item.product.id,
+          title: item.product.title,
+          price: item.product.price,
+          quantity: item.quantity,
+        })),
+        totalPrice: totalPrice,
+      };
+
+      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+      const response = await fetch(`${apiUrl}/orders`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderPayload),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to place order");
+      }
+
+      const savedOrder = await response.json();
+      toast.success("Order successfully placed!");
+      navigate("/success", {
+        state: {
+          orderId: savedOrder._id,
+          total: totalPrice.toFixed(2),
+        },
+      });
+
+      clearCart();
+    } catch (error) {
+      console.error("Checkout error:", error);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
   if (cart.length === 0) {
     return (
       <div
@@ -72,7 +110,6 @@ export function Checkout() {
       <h1 className={styles.title}>Checkout</h1>
       <div className={styles.summaryBlock}>
         <h2 className={styles.summaryTitle}>Order Summary</h2>
-
         <div>
           {cart.map((item) => (
             <div key={item.product.id} className={styles.summaryItem}>
@@ -96,6 +133,7 @@ export function Checkout() {
           </div>
         </div>
       </div>
+
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.inputGroup}>
           <label htmlFor="name" className={styles.label}>
@@ -109,6 +147,7 @@ export function Checkout() {
             placeholder="John Doe"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            disabled={isSubmitting}
           />
         </div>
         <div className={styles.inputGroup}>
@@ -125,6 +164,7 @@ export function Checkout() {
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
             }
+            disabled={isSubmitting}
           />
         </div>
         <div className={styles.inputGroup}>
@@ -141,6 +181,7 @@ export function Checkout() {
             onChange={(e) =>
               setFormData({ ...formData, phone: e.target.value })
             }
+            disabled={isSubmitting}
           />
         </div>
         <div className={styles.inputGroup}>
@@ -157,10 +198,20 @@ export function Checkout() {
             onChange={(e) =>
               setFormData({ ...formData, address: e.target.value })
             }
+            disabled={isSubmitting}
           />
         </div>
-        <button type="submit" className={styles.submitBtn}>
-          Place Order
+
+        <button
+          type="submit"
+          className={styles.submitBtn}
+          disabled={isSubmitting}
+          style={{
+            opacity: isSubmitting ? 0.7 : 1,
+            cursor: isSubmitting ? "not-allowed" : "pointer",
+          }}
+        >
+          {isSubmitting ? "Processing..." : "Place Order"}
         </button>
       </form>
     </div>

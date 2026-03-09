@@ -40,8 +40,11 @@ export function useShop() {
       const isWithinCollection =
         selectedCollections.length === 0 ||
         selectedCollections.includes(product.collection);
+      const isNotBundle = product.isBundle !== true;
 
-      return isWithinPrice && isWithinCollection && matchesSearch;
+      return (
+        isWithinPrice && isWithinCollection && matchesSearch && isNotBundle
+      );
     });
   }, [priceRange, searchQuery, selectedCollections, serverProducts]);
 

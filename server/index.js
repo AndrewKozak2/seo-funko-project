@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const Product = require("./models/Product");
+const Order = require("./models/Order");
 
 dotenv.config();
 
@@ -25,6 +26,18 @@ app.get("/products", async (req, res) => {
     res.json(products);
   } catch (error) {
     res.status(500).json({ message: "Server Error" });
+  }
+});
+
+app.post("/orders", async (req, res) => {
+  try {
+    const newOrder = new Order(req.body);
+    const saveOrder = await newOrder.save();
+    console.log("New Order Created", saveOrder);
+    res.status(201).json(saveOrder);
+  } catch (error) {
+    console.error("Order Save Error", error);
+    res.status(500).json({ message: "Error creating order" });
   }
 });
 
