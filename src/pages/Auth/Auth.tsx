@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import styles from "./Auth.module.css";
 
 type AuthMode = "login" | "register" | "verify";
-
+// Trigger Vercel rebuild after rollback
 export function Auth() {
   const [authMode, setAuthMode] = useState<AuthMode>("login");
   const [formData, setFormData] = useState({
