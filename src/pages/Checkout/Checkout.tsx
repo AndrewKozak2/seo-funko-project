@@ -22,6 +22,7 @@ export function Checkout() {
     isSubmitting,
     loadCities,
   } = useCheckout();
+
   if (cart.length === 0) {
     return (
       <div
@@ -41,6 +42,21 @@ export function Checkout() {
       </div>
     );
   }
+
+  const customWarehouseFilter = (option: any, inputValue: string) => {
+    if (!inputValue) return true;
+
+    const search = inputValue.toLowerCase().trim();
+    const label = option.label.toLowerCase();
+
+    if (/^\d+$/.test(search)) {
+      const exactNumberMatch = new RegExp(`№\\s*${search}\\b`).test(label);
+      if (exactNumberMatch) return true;
+    }
+    const searchTerms = search.split(" ").filter((term) => term.length > 0);
+    return searchTerms.every((term) => label.includes(term));
+  };
+
   return (
     <div className="container" style={{ padding: "40px 20px 100px 20px" }}>
       <h1 className={styles.title}>Checkout</h1>
@@ -155,6 +171,7 @@ export function Checkout() {
             styles={customStyles}
             value={selectedWarehouse}
             required
+            filterOption={customWarehouseFilter}
           />
         </div>
 
