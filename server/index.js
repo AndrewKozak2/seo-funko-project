@@ -70,14 +70,25 @@ app.post("/register", async (req, res) => {
     });
     await newUser.save();
 
-    await sendEmail(email, verificationCode);
-    res.status(201).json({ message: "Verification code sent to email" });
+    console.log(
+      `[DEV MODE] Код підтвердження для ${email}: ${verificationCode}`,
+    );
+
+    try {
+      await sendEmail(email, verificationCode);
+    } catch (emailError) {
+      console.error(
+        "Попередження: Лист не відправлено, але юзера створено.",
+        emailError.message,
+      );
+    }
+
+    res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     console.error("Register error:", error);
     res.status(500).json({ message: "Server error during registration" });
   }
 });
-
 app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
