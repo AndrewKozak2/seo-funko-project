@@ -223,3 +223,88 @@
   font-size: 13px;
   margin: 0;
 }
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.editBtn {
+  background: transparent;
+  color: #94a3b8;
+  border: 1px solid #475569;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.editBtn:hover {
+  background: #334155;
+  color: #f8fafc;
+  border-color: #94a3b8;
+}
+
+.editForm {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.editInput {
+  flex: 1;
+  padding: 8px 12px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid #475569;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  outline: none;
+}
+
+.editInput:focus {
+  border-color: #ff8a00;
+}
+
+.saveBtn {
+  background-color: #ff880095;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.saveBtn:hover:not(:disabled) {
+  background-color: #ff8a00;
+}
+
+.saveBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.cancelBtn {
+  background-color: transparent;
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.cancelBtn:hover {
+  background-color: #ef4444;
+  color: white;
+}

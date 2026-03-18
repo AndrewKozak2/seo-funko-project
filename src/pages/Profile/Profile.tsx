@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/authStore";
 import { LogOut } from "lucide-react";
 import styles from "./Profile.module.css";
+import toast from "react-hot-toast";
 
 interface OrderItem {
   productId: string;
@@ -22,10 +23,15 @@ interface Order {
 export function Profile() {
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
+  const login = useAuthStore((state) => state.login);
+  const token = useAuthStore((state) => state.token);
   const navigate = useNavigate();
 
   const [orders, setOrders] = useState<Order[]>([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
+  const [newName, setNewName] = useState(user?.name || "");
+  const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -56,6 +62,37 @@ export function Profile() {
 
   if (!user) return null;
 
+  const handleUpdateName = async () => {
+    if (!newName.trim() || newName === user?.name) {
+      setIsEditing(false);
+      return;
+    }
+    setIsUpdating(true);
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+      const response = await fetch(`${apiUrl}/user/update`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: user.email, newName: newName }),
+      });
+      const data = await response.json();
+
+      if (!response.ok) throw new Error(data.message || "Updated failed");
+
+      if (login && token) {
+        login(data.user, token);
+      }
+      setIsEditing(false);
+      toast.success("Name successfully updated!");
+    } catch (error) {
+      console.error("Name update error:", error);
+      toast.error(`Failed to update name`);
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
   const handleLogout = () => {
     logout();
     navigate("/");
@@ -71,7 +108,39 @@ export function Profile() {
             {user.name.charAt(0).toUpperCase()}
           </div>
           <div className={styles.userInfo}>
-            <p className={styles.userName}>{user.name}</p>
+            {isEditing ? (
+              <div className={styles.editForm}>
+                <input
+                  type="text"
+                  value={newName}
+                  onChange={(e) => setNewName(e.target.value)}
+                  className={styles.editInput}
+                />
+                <button
+                  className={styles.saveBtn}
+                  onClick={handleUpdateName}
+                  disabled={isUpdating}
+                >
+                  {isUpdating ? "..." : "Save"}
+                </button>
+                <button
+                  className={styles.cancelBtn}
+                  onClick={() => setIsEditing(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            ) : (
+              <div className={styles.nameRow}>
+                <p className={styles.userName}>{user.name}</p>
+                <button
+                  className={styles.editBtn}
+                  onClick={() => setIsEditing(true)}
+                >
+                  Edit
+                </button>
+              </div>
+            )}
             <p className={styles.userEmail}>{user.email}</p>
           </div>
         </div>
