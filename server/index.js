@@ -224,6 +224,32 @@ app.post("/orders", async (req, res) => {
   }
 });
 
+app.put("/user/update", async (req, res) => {
+  try {
+    const { email, newName } = req.body;
+    if (!email || !newName) {
+      return res
+        .status(400)
+        .json({ message: "Email and new name are required" });
+    }
+    const updatedUser = await User.findOneAndUpdate(
+      { email: email },
+      { name: newName },
+      { new: true },
+    );
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json({
+      message: "Profile successfully updated",
+      user: updatedUser,
+    });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(` Server running on port ${PORT}`);
