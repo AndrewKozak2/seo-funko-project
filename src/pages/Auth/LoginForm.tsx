@@ -1,16 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import styles from "./Auth.module.css";
 
 interface LoginFormProps {
   authMode: "login" | "register";
-  formData: any; // Передаємо весь об'єкт
-  setFormData: (data: any) => void; // Передаємо функцію оновлення
+  formData: any;
+  setFormData: (data: any) => void;
   isLoading: boolean;
-  showPassword: boolean;
-  setShowPassword: (val: boolean) => void;
-  showConfirmPassword: boolean;
-  setShowConfirmPassword: (val: boolean) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   onForgotPassword: () => void;
   onToggleMode: () => void;
@@ -21,14 +17,12 @@ export function LoginForm({
   formData,
   setFormData,
   isLoading,
-  showPassword,
-  setShowPassword,
-  showConfirmPassword,
-  setShowConfirmPassword,
   onSubmit,
   onForgotPassword,
   onToggleMode,
 }: LoginFormProps) {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   return (
     <>
       <form onSubmit={onSubmit}>

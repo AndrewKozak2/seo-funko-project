@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import styles from "./Auth.module.css";
 
@@ -6,16 +6,10 @@ interface ResetPasswordFormProps {
   email: string;
   code: string[];
   isLoading: boolean;
-  passwordValue: string;
-  confirmPasswordValue: string;
-  showPassword: boolean;
-  showConfirmPassword: boolean;
+  formData: any;
+  setFormData: (data: any) => void;
   onOtpChange: (index: number, value: string) => void;
   onKeyDown: (index: number, e: React.KeyboardEvent<HTMLInputElement>) => void;
-  onPasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onConfirmPasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onTogglePassword: () => void;
-  onToggleConfirmPassword: () => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   onBack: () => void;
 }
@@ -24,19 +18,15 @@ export function ResetPasswordForm({
   email,
   code,
   isLoading,
-  passwordValue,
-  confirmPasswordValue,
-  showPassword,
-  showConfirmPassword,
+  formData,
+  setFormData,
   onOtpChange,
   onKeyDown,
-  onPasswordChange,
-  onConfirmPasswordChange,
-  onTogglePassword,
-  onToggleConfirmPassword,
   onSubmit,
   onBack,
 }: ResetPasswordFormProps) {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   return (
     <form onSubmit={onSubmit}>
       <p className={styles.infoText}>
@@ -67,13 +57,15 @@ export function ResetPasswordForm({
             type={showPassword ? "text" : "password"}
             required
             className={styles.input}
-            value={passwordValue}
-            onChange={onPasswordChange}
+            value={formData.password}
+            onChange={(e) =>
+              setFormData({ ...formData, password: e.target.value })
+            }
           />
           <button
             type="button"
             className={styles.eyeBtn}
-            onClick={onTogglePassword}
+            onClick={() => setShowPassword(!showPassword)}
           >
             {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
           </button>
@@ -86,13 +78,15 @@ export function ResetPasswordForm({
             type={showConfirmPassword ? "text" : "password"}
             required
             className={styles.input}
-            value={confirmPasswordValue}
-            onChange={onConfirmPasswordChange}
+            value={formData.confirmPassword}
+            onChange={(e) =>
+              setFormData({ ...formData, confirmPassword: e.target.value })
+            }
           />
           <button
             type="button"
             className={styles.eyeBtn}
-            onClick={onToggleConfirmPassword}
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
           >
             {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
           </button>
