@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Admin.module.css";
 import toast from "react-hot-toast";
 
@@ -15,11 +15,8 @@ interface Order {
   status: string;
 }
 
-export function Admin() {
-  const [password, setPassword] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+export function AdminOrders() {
   const [orders, setOrders] = useState<Order[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const savedKey = localStorage.getItem("adminKey");
@@ -29,10 +26,8 @@ export function Admin() {
   }, []);
 
   const fetchOrders = async (key: string) => {
-    setIsLoading(true);
     try {
       const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
-
       const response = await fetch(`${apiUrl}/orders`, {
         method: "GET",
         headers: {
@@ -41,36 +36,14 @@ export function Admin() {
         },
       });
 
-      if (response.status === 403) {
-        toast.error("Wrong password!");
-        localStorage.removeItem("adminKey");
-        setIsAuthenticated(false);
-        return;
-      }
-
       if (!response.ok) throw new Error("Failed to fetch");
 
       const data = await response.json();
       setOrders(data);
-      setIsAuthenticated(true);
-      localStorage.setItem("adminKey", key);
     } catch (error) {
       console.error(error);
       toast.error("Error loading orders");
-    } finally {
-      setIsLoading(false);
     }
-  };
-
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    fetchOrders(password);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("adminKey");
-    setIsAuthenticated(false);
-    setPassword("");
   };
 
   const updateStatus = async (orderId: string, newStatus: string) => {
@@ -78,7 +51,7 @@ export function Admin() {
       const savedKey = localStorage.getItem("adminKey");
       const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
-      const responce = await fetch(`${apiUrl}/orders/${orderId}/status`, {
+      const response = await fetch(`${apiUrl}/orders/${orderId}/status`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -86,7 +59,7 @@ export function Admin() {
         },
         body: JSON.stringify({ status: newStatus }),
       });
-      if (!responce.ok) throw new Error("Failed to update status");
+      if (!response.ok) throw new Error("Failed to update status");
 
       setOrders((prevOrders) =>
         prevOrders.map((order) =>
@@ -100,26 +73,6 @@ export function Admin() {
     }
   };
 
-  if (!isAuthenticated) {
-    return (
-      <div className={`container ${styles.wrapper}`}>
-        <form onSubmit={handleLogin} className={styles.loginBox}>
-          <h2>Admin Access</h2>
-          <input
-            type="password"
-            placeholder="Enter Admin Key"
-            className={styles.input}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button type="submit" className={styles.button} disabled={isLoading}>
-            {isLoading ? "Checking..." : "Login"}
-          </button>
-        </form>
-      </div>
-    );
-  }
-
   const getStatusClass = (status: string) => {
     switch (status) {
       case "Delivered":
@@ -132,18 +85,16 @@ export function Admin() {
         return styles.statusPending;
     }
   };
+
   return (
-    <div className={`container ${styles.wrapper}`}>
+    <>
       <div className={styles.header}>
         <div>
-          <h1>Orders Dashboard</h1>
+          <h1 style={{ margin: 0 }}>Orders Dashboard</h1>
           <p style={{ color: "#94a3b8", marginTop: "5px" }}>
             Total orders: {orders.length}
           </p>
         </div>
-        <button onClick={handleLogout} className={styles.logoutBtn}>
-          Logout
-        </button>
       </div>
 
       <div className={styles.tableWrapper}>
@@ -199,6 +150,6 @@ export function Admin() {
           </tbody>
         </table>
       </div>
-    </div>
+    </>
   );
 }

@@ -2,7 +2,7 @@ import { useCartStore } from "./store/cartStore";
 import { useState } from "react";
 import { Header } from "./components/Header/Header";
 import { Cart } from "./components/Cart/Cart";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { Shop } from "./pages/Shop/Shop";
 import { ProductPage } from "./pages/ProductPage/ProductPage";
 import { Exclusives } from "./pages/Exclusives/Exclusives";
@@ -10,7 +10,6 @@ import { Offers } from "./pages/Offers/Offers";
 import { Checkout } from "./pages/Checkout/Checkout";
 import { Wishlist } from "./pages/Wishlist/Wishlist";
 import { Success } from "./pages/Success/Success";
-import { Admin } from "./pages/Admin/Admin";
 import { Profile } from "./pages/Profile/Profile";
 import { Auth } from "./pages/Auth/Auth";
 import { AdminRoute } from "./components/AdminRoute/AdminRoute";
@@ -19,6 +18,9 @@ import { ScrollToTop } from "./components/ScrollToTop";
 import { ScrollUpButton } from "./components/ScrollUpButton/ScrollUpButton";
 import { Toaster } from "react-hot-toast";
 import "./App.css";
+import { AdminLayout } from "./pages/Admin/AdminLayout";
+import { AdminOrders } from "./pages/Admin/AdminOrders";
+import { AdminPromoCodes } from "./pages/Admin/AdminPromoCodes";
 
 function App() {
   const cart = useCartStore((state) => state.cart);
@@ -51,10 +53,15 @@ function App() {
             path="/admin"
             element={
               <AdminRoute>
-                <Admin />
+                <AdminLayout />
               </AdminRoute>
             }
-          />
+          >
+            <Route index element={<Navigate to="orders" replace />} />
+            <Route path="orders" element={<AdminOrders />} />
+            <Route path="promocodes" element={<AdminPromoCodes />} />
+          </Route>
+
           <Route path="/auth" element={<Auth />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/product/:id" element={<ProductPage />} />
