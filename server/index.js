@@ -350,6 +350,42 @@ app.post("/apply-promo", async (req, res) => {
   }
 });
 
+app.get("/promocodes", async (req, res) => {
+  try {
+    const adminKey = req.headers["x-admin-key"];
+    if (adminKey !== process.env.ADMIN_SECRET) {
+      return res
+        .status(403)
+        .json({ message: "Access denied. Invalid admin key" });
+    }
+    const promoCodes = await PromoCode.find();
+    res.json(promoCodes);
+  } catch (error) {
+    console.error("Error fetching promo codes:", error);
+    res
+      .status(500)
+      .json({ message: "Server error while fetching promo codes" });
+  }
+});
+
+app.delete("/promocodes/:id", async (req, res) => {
+  try {
+    const adminKey = req.headers["x-admin-key"];
+    if (adminKey !== process.env.ADMIN_SECRET) {
+      return res.status(403).json({ message: "Access denied" });
+    }
+    const { id } = req.params;
+    const deletePromoCode = await PromoCode.findByIdAndDelete(id);
+    if (!deletePromoCode) {
+      return res.status(404).json({ message: "Promo Code not deleted" });
+    }
+
+    res.json({ message: "Promo code deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting promo code" });
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(` Server running on port ${PORT}`);

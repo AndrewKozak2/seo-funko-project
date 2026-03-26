@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styles from "./Admin.module.css";
+import styles from "./AdminOrders.module.css";
 import toast from "react-hot-toast";
 
 interface Order {

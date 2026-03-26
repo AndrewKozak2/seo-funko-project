@@ -9,6 +9,7 @@
   padding: 10px 0 0 40px;
   position: relative;
   min-height: 350px;
+  margin-top: 0.5rem;
 }
 .preOrderBtn {
   background: #ff880095;

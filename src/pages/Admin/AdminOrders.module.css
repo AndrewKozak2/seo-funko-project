@@ -1,0 +1,71 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1e293b;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #334155;
+}
+
+.table th {
+  background: #0f172a;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  background: #059669;
+  color: white;
+}
+
+.statusSelect {
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  outline: none;
+}
+
+.statusOption {
+  background-color: #1e293b;
+}
+
+.statusPending {
+  background-color: #f59e0b;
+}
+
+.statusShipped {
+  background-color: #3b82f6;
+}
+
+.statusDelivered {
+  background-color: #10b981;
+}
+
+.statusCancelled {
+  background-color: #ef4444;
+}

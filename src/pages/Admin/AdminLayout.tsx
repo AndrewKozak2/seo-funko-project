@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import styles from "./AdminLayout.module.css";
-import loginStyles from "./Admin.module.css";
 
 export function AdminLayout() {
   const navigate = useNavigate();
@@ -62,19 +61,19 @@ export function AdminLayout() {
 
   if (!isAuthenticated) {
     return (
-      <div className={`container ${loginStyles.wrapper}`}>
-        <form onSubmit={handleLogin} className={loginStyles.loginBox}>
+      <div className={styles.loginWrapper}>
+        <form onSubmit={handleLogin} className={styles.loginBox}>
           <h2>Admin Access</h2>
           <input
             type="password"
             placeholder="Enter Admin Key"
-            className={loginStyles.input}
+            className={styles.input}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <button
             type="submit"
-            className={loginStyles.button}
+            className={styles.submitBtn}
             disabled={isLoading}
           >
             {isLoading ? "Checking..." : "Login"}

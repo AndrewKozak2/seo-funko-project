@@ -1,7 +1,6 @@
 .headerWrapper {
   background-color: var(--color-bg);
   border-bottom: 2px solid #00bdc347;
-  margin-bottom: 0.5rem;
 }
 
 .headerContent {
