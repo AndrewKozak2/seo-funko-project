@@ -20,6 +20,7 @@ import { Toaster } from "react-hot-toast";
 import { AdminLayout } from "./pages/Admin/AdminLayout";
 import { AdminOrders } from "./pages/Admin/AdminOrders";
 import { AdminPromoCodes } from "./pages/Admin/AdminPromoCodes";
+import { AdminProducts } from "./pages/Admin/AdminProducts";
 import "./App.css";
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
             <Route index element={<Navigate to="orders" replace />} />
             <Route path="orders" element={<AdminOrders />} />
             <Route path="promocodes" element={<AdminPromoCodes />} />
+            <Route path="products" element={<AdminProducts />} />
           </Route>
 
           <Route path="/auth" element={<Auth />} />

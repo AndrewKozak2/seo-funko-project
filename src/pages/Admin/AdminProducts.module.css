@@ -1,0 +1,162 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 1.8rem;
+  color: white;
+  font-weight: 500;
+}
+
+.subtitle {
+  color: #94a3b8;
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+
+.createProductBtn {
+  background-color: #00f6ff;
+  color: #0b1524;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.createProductBtn:hover {
+  opacity: 0.8;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  background-color: #1e293b;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+}
+
+.table th {
+  text-align: left;
+  padding: 16px 20px;
+  color: #94a3b8;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(15, 23, 42, 0.5);
+}
+
+.table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: middle;
+}
+
+.emptyTableMessage {
+  text-align: center;
+  padding: 40px !important;
+  color: #94a3b8;
+}
+
+.productId {
+  color: #00f6ff;
+  font-family: monospace;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.imageMin {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  padding: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.productTitle {
+  font-weight: 500;
+  color: #f8fafc;
+}
+
+.productCollection {
+  color: #cbd5e1;
+}
+
+.oldPrice {
+  text-decoration: line-through;
+  color: #64748b;
+  font-size: 0.85rem;
+  margin-right: 8px;
+}
+
+.currentPrice {
+  color: #10b981;
+  font-weight: 500;
+}
+
+.badgeBundle {
+  background-color: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  display: inline-block;
+  margin-right: 6px;
+  margin-bottom: 4px;
+}
+
+.badgeExclusive {
+  background-color: rgba(168, 85, 247, 0.15);
+  color: #c084fc;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  display: inline-block;
+  margin-right: 6px;
+  margin-bottom: 4px;
+}
+
+.badgeStandard {
+  background-color: rgba(148, 163, 184, 0.1);
+  color: #94a3b8;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  display: inline-block;
+  margin-right: 6px;
+  margin-bottom: 4px;
+}
+
+.deleteBtn {
+  background-color: transparent;
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.deleteBtn:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  border-color: #ef4444;
+}

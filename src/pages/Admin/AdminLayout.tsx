@@ -90,6 +90,14 @@ export function AdminLayout() {
 
         <nav className={styles.navMenu}>
           <NavLink
+            to="/admin/products"
+            className={({ isActive }) =>
+              isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
+            }
+          >
+            Products
+          </NavLink>
+          <NavLink
             to="/admin/orders"
             className={({ isActive }) =>
               isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
