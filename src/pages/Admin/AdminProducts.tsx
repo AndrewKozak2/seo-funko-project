@@ -3,7 +3,7 @@ import styles from "./AdminProducts.module.css";
 import toast from "react-hot-toast";
 import { CreateProductModal } from "./CreateProductModal";
 
-interface ProductAdmin {
+export interface ProductAdmin {
   _id: string;
   id: string;
   title: string;
