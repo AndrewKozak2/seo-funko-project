@@ -12,53 +12,84 @@ export function CreateProductModal({
   onSuccess,
 }: CreateProductModalProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>("");
 
   const [formData, setFormData] = useState({
     title: "",
     price: "",
-    imageUrl: "",
     collection: "",
     isExclusive: false,
     isBundle: false,
-    originalPrice: "",
   });
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImageFile(file);
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!imageFile) {
+      toast.error("Please select an image!");
+      return;
+    }
+
     setIsLoading(true);
-    const safeTitle = formData.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-    const randomNum = Math.floor(Math.random() * 1000);
-    let finalId = formData.isBundle
-      ? `bundle-${safeTitle}-${randomNum}`
-      : `${safeTitle}-${randomNum}`;
-    const productPayload = {
-      ...formData,
-      id: finalId,
-      price: Number(formData.price),
-    };
+
     try {
       const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
-      const savedKey = localStorage.getItem("adminKey");
-      const response = await fetch(`${apiUrl}/products`, {
+      const savedKey = localStorage.getItem("adminKey") || "";
+
+      const uploadData = new FormData();
+      uploadData.append("image", imageFile);
+
+      const uploadResponse = await fetch(`${apiUrl}/upload`, {
+        method: "POST",
+        body: uploadData,
+      });
+
+      if (!uploadResponse.ok) throw new Error("Failed to upload image");
+      const uploadResult = await uploadResponse.json();
+
+      const finalImageUrl = uploadResult.imageUrl;
+
+      const safeTitle = formData.title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-");
+      const randomNum = Math.floor(Math.random() * 1000);
+      let finalId = formData.isBundle
+        ? `bundle-${safeTitle}-${randomNum}`
+        : `${safeTitle}-${randomNum}`;
+
+      const productPayload = {
+        ...formData,
+        id: finalId,
+        price: Number(formData.price),
+        imageUrl: finalImageUrl,
+      };
+
+      const productResponse = await fetch(`${apiUrl}/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-admin-key": savedKey || "",
+          "x-admin-key": savedKey,
         },
         body: JSON.stringify(productPayload),
       });
-      const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error(data.message || "Failed to create products");
-      }
+      if (!productResponse.ok) throw new Error("Failed to create product");
 
       toast.success("Product created successfully!");
       onSuccess();
       onClose();
     } catch (error) {
       console.error(error);
-      toast.error("Failed to create product");
+      toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
     }
@@ -80,6 +111,7 @@ export function CreateProductModal({
               required
             />
           </div>
+
           <div className={styles.inputGroup}>
             <label>Price</label>
             <input
@@ -92,18 +124,36 @@ export function CreateProductModal({
             />
           </div>
           <div className={styles.inputGroup}>
-            <label>imageUrl</label>
+            <label>Product Image</label>
             <input
-              type="text"
-              value={formData.imageUrl}
-              onChange={(e) =>
-                setFormData({ ...formData, imageUrl: e.target.value })
-              }
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
               required
+              style={{
+                padding: "8px",
+                background: "transparent",
+                border: "1px dashed rgba(255,255,255,0.3)",
+              }}
             />
+            {imagePreview && (
+              <img
+                src={imagePreview}
+                alt="Preview"
+                style={{
+                  width: "80px",
+                  height: "80px",
+                  objectFit: "contain",
+                  marginTop: "10px",
+                  borderRadius: "8px",
+                  backgroundColor: "rgba(255,255,255,0.05)",
+                }}
+              />
+            )}
           </div>
+
           <div className={styles.inputGroup}>
-            <label>collection</label>
+            <label>Collection</label>
             <input
               type="text"
               value={formData.collection}
@@ -113,6 +163,7 @@ export function CreateProductModal({
               required
             />
           </div>
+
           <div className={styles.checkboxGroup}>
             <label>
               <input
@@ -123,6 +174,19 @@ export function CreateProductModal({
                 }
               />
               Is Exclusive?
+            </label>
+          </div>
+
+          <div className={styles.checkboxGroup}>
+            <label>
+              <input
+                type="checkbox"
+                checked={formData.isBundle}
+                onChange={(e) =>
+                  setFormData({ ...formData, isBundle: e.target.checked })
+                }
+              />
+              Is Bundle?
             </label>
           </div>
 

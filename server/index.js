@@ -6,16 +6,19 @@ const orderRoutes = require("./routes/orderRoutes");
 const promoRoutes = require("./routes/promoRoutes");
 const productRoutes = require("./routes/productRoutes");
 const authRoutes = require("./routes/authRoutes");
+const uploadRoutes = require("./routes/uploadRoutes");
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use("/upload", uploadRoutes);
 app.use("/products", productRoutes);
 app.use("/orders", orderRoutes);
 app.use("/promocodes", promoRoutes);
 app.use("/auth", authRoutes);
+
 
 mongoose
   .connect(process.env.MONGO_URI)
