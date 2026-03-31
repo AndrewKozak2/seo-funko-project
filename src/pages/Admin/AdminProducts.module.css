@@ -2,7 +2,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .pageTitle {
@@ -18,13 +24,34 @@
   font-size: 0.9rem;
 }
 
+.searchContainer {
+  width: 300px;
+}
+.searchInput {
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 400px;
+  padding: 10px 15px;
+  background-color: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: white;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #00f6ff;
+}
+
 .createProductBtn {
   background-color: #00f6ff;
   color: #0b1524;
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
-  font-weight: 500;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: opacity 0.2s ease;
 }
@@ -72,6 +99,11 @@
   font-family: monospace;
   font-size: 1rem;
   font-weight: 500;
+  display: block;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .imageMin {

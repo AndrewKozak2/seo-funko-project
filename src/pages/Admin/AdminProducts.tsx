@@ -18,6 +18,7 @@ export function AdminProducts() {
   const [adminProducts, setAdminProducts] = useState<ProductAdmin[]>([]);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     fetchAdminProducts();
@@ -75,6 +76,16 @@ export function AdminProducts() {
     }
   };
 
+  const filteredProducts = adminProducts.filter((product) => {
+    const matchesTitle = product.title
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesCollection = product.collection
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    return matchesTitle || matchesCollection;
+  });
+
   return (
     <>
       <div className={styles.header}>
@@ -84,13 +95,23 @@ export function AdminProducts() {
             Total products: {adminProducts.length}
           </p>
         </div>
-
-        <button
-          className={styles.createProductBtn}
-          onClick={() => setIsCreateModalOpen(true)}
-        >
-          + Create New
-        </button>
+        <div className={styles.headerActions}>
+          <div className={styles.searchContainer}>
+            <input
+              type="text"
+              placeholder="Search funko by title or collection..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className={styles.searchInput}
+            />
+          </div>
+          <button
+            className={styles.createProductBtn}
+            onClick={() => setIsCreateModalOpen(true)}
+          >
+            + Create New
+          </button>
+        </div>
       </div>
 
       <div className={styles.tableWrapper}>
@@ -115,10 +136,10 @@ export function AdminProducts() {
               </tr>
             )}
 
-            {adminProducts.map((product) => (
+            {filteredProducts.map((product) => (
               <tr key={product._id}>
                 <td>
-                  <strong className={styles.productId}>{product.id}</strong>
+                  <strong className={styles.productId} title={product.id}>{product.id}</strong>
                 </td>
                 <td>
                   <img
@@ -166,7 +187,7 @@ export function AdminProducts() {
       {isCreateModalOpen && (
         <CreateProductModal
           onClose={() => setIsCreateModalOpen(false)}
-          onSuccess={fetchAdminProducts} 
+          onSuccess={fetchAdminProducts}
           products={adminProducts}
         />
       )}
