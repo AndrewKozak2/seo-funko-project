@@ -241,7 +241,10 @@ export function Header({ cartItemsCount, onOpenCart }: HeaderProps) {
                               to={`/product/${product.id}`}
                               key={product.id}
                               className={styles.searchResultItem}
-                              onClick={() => setIsSearchFocused(false)}
+                              onClick={() => {
+                                setIsSearchFocused(false);
+                                setLocalSearch("");
+                              }}
                             >
                               <img
                                 src={product.imageUrl}

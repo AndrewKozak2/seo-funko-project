@@ -79,7 +79,11 @@ export function Shop() {
           </aside>
           <div className={styles.mainContent} id="figures">
             <div className={styles.productsHeader}>
-              <span>Found: {totalCount} items</span>
+              <span>
+                {filters.searchQuery
+                  ? `Search Results for "${filters.searchQuery}" (${totalCount} items)`
+                  : `Found: ${totalCount} items`}
+              </span>
               <div className={styles.sortContainer}>
                 <label htmlFor="sort-select">Sort by: </label>
                 <select
