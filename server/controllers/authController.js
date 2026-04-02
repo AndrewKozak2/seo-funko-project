@@ -223,7 +223,17 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const emailToDelete = req.params.email;
-    await Order.deleteMany({ "customer.email": emailToDelete });
+    await Order.updateMany(
+      { "customer.email": emailToDelete },
+      {
+        $set: {
+          "customer.email": "deleted@user.com",
+          "customer.name": "Deleted User",
+          "customer.address": "Deleted Address",
+          "customer.phone": "0000000000",
+        },
+      },
+    );
     const deleteUser = await User.findOneAndDelete({ email: emailToDelete });
     if (!deleteUser) {
       return res.status(404).json({ message: "User not deleted" });
