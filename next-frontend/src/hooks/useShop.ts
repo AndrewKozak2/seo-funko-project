@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useMemo, useCallback } from "react";
-// 1. ЗМІНА: Використовуємо навігацію Next.js
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useProductStore } from "@/store/productStore";
 
@@ -12,14 +11,13 @@ export function useShop() {
 
   const { products: serverProducts } = useProductStore();
 
-  // --- ЧИТАННЯ ПАРАМЕТРІВ ---
   const searchQuery = searchParams.get("search") || "";
   const sortParam = searchParams.get("sort") || "default";
   const collectionsParam = searchParams.get("collections");
 
   const selectedCollections = useMemo(
     () => (collectionsParam ? collectionsParam.split(",") : []),
-    [collectionsParam]
+    [collectionsParam],
   );
 
   const minParam = searchParams.get("min");
@@ -29,18 +27,15 @@ export function useShop() {
       minParam !== null ? Number(minParam) : 0,
       maxParam !== null ? Number(maxParam) : 100,
     ],
-    [minParam, maxParam]
+    [minParam, maxParam],
   );
 
   const [visibleCount, setVisibleCount] = useState(8);
 
-  // Скидаємо лічильник при зміні будь-якого фільтра
   useEffect(() => {
     setVisibleCount(8);
   }, [collectionsParam, minParam, maxParam, searchQuery, sortParam]);
 
-  // --- ДОПОМІЖНА ФУНКЦІЯ ДЛЯ ОНОВЛЕННЯ URL ---
-  // Вона бере поточні параметри та безпечно додає/видаляє нові
   const createQueryString = useCallback(
     (paramsToUpdate: Record<string, string | null>) => {
       const params = new URLSearchParams(searchParams.toString());
@@ -55,10 +50,9 @@ export function useShop() {
 
       return params.toString();
     },
-    [searchParams]
+    [searchParams],
   );
 
-  // --- ЛОГІКА ФІЛЬТРАЦІЇ ---
   const filteredProducts = useMemo(() => {
     return serverProducts.filter((product) => {
       const isWithinPrice =
@@ -71,7 +65,7 @@ export function useShop() {
       const isWithinCollection =
         selectedCollections.length === 0 ||
         selectedCollections.includes(product.collection);
-      
+
       const isNotBundle = product.isBundle !== true;
 
       return (
@@ -80,7 +74,6 @@ export function useShop() {
     });
   }, [priceRange, searchQuery, selectedCollections, serverProducts]);
 
-  // --- ЛОГІКА СОРТУВАННЯ ---
   const sortedProducts = useMemo(() => {
     return [...filteredProducts].sort((a, b) => {
       switch (sortParam) {
@@ -100,11 +93,8 @@ export function useShop() {
 
   const visibleProducts = sortedProducts.slice(0, visibleCount);
 
-  // --- ОБРОБНИКИ ПОДІЙ (ACTIONS) ---
-
   const updateURL = (newParams: Record<string, string | null>) => {
     const queryString = createQueryString(newParams);
-    // scroll: false дозволяє оновити URL без стрибка сторінки вгору
     router.push(`${pathname}?${queryString}`, { scroll: false });
   };
 
