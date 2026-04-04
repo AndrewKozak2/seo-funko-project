@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Hero } from "@/components/Hero/Hero";
 import { Filters } from "@/components/Filters/Filters";
@@ -11,7 +11,7 @@ import { useProductStore } from "@/store/productStore";
 import { useShop } from "@/hooks/useShop";
 import styles from "./Shop.module.css";
 
-export default function ShopPage() {
+function ShopContent() {
   const addToCart = useCartStore((state) => state.addToCart);
   const { fetchProducts, isLoading, error } = useProductStore();
 
@@ -145,5 +145,14 @@ export default function ShopPage() {
       </div>
       <Newsletter />
     </>
+  );
+}
+export default function ShopPage() {
+  return (
+    <Suspense
+      fallback={<div className="container">Loading...</div>}
+    >
+      <ShopContent />
+    </Suspense>
   );
 }
