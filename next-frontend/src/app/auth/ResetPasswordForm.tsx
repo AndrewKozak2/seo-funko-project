@@ -1,4 +1,4 @@
-"use client"; // ОБОВ'ЯЗКОВО для роботи з useState та подіями
+"use client";
 
 import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
@@ -49,7 +49,7 @@ export function ResetPasswordForm({
             onKeyDown={(e) => onKeyDown(index, e)}
             className={styles.otpInput}
             required
-            disabled={isLoading} // Порада: блокуємо інпути під час завантаження
+            disabled={isLoading}
           />
         ))}
       </div>

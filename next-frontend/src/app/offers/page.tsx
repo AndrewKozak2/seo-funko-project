@@ -1,7 +1,6 @@
-"use client"; // 1. ГОВОРИМО NEXT.JS, ЩО ЦЕ КЛІЄНТСЬКИЙ КОМПОНЕНТ
+"use client";
 
 import { useEffect, useMemo } from "react";
-// 2. ОНОВЛЕННЯ ШЛЯХІВ: Використовуємо аліаси @
 import { BundleCard } from "@/components/BundleCard/BundleCard";
 import { useCartStore } from "@/store/cartStore";
 import { useProductStore } from "@/store/productStore";
@@ -12,12 +11,10 @@ export default function OffersPage() {
   const addToCart = useCartStore((state) => state.addToCart);
   const { products, fetchProducts, isLoading } = useProductStore();
 
-  // 3. ФЕТЧИНГ: Залишаємо клієнтським, як було в оригіналі
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
 
-  // Фільтруємо лише бандли (комбо-пропозиції)
   const bundles = useMemo(() => {
     return products.filter((item) => item.isBundle === true);
   }, [products]);
@@ -36,8 +33,6 @@ export default function OffersPage() {
         <Tag size={40} color="#ff8a00" />
         <h1 className={styles.title}>Special Offers & Bundles</h1>
       </div>
-
-      {/* 4. ЗАМІНА: Використовуємо global .product-grid для уніфікації */}
       <div className={`product-grid ${styles.centeredGrid}`}>
         {bundles.length > 0 ? (
           bundles.map((bundle) => (

@@ -18,7 +18,6 @@ import { useAuthStore } from "@/store/authStore";
 import { useCartStore } from "@/store/cartStore";
 import styles from "./Header.module.css";
 
-// 1. ПРИБИРАЄМО INTERFACE PROPS — вони нам більше не потрібні
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -35,15 +34,11 @@ export function Header() {
 
   const { user, logout } = useAuthStore();
 
-  // 2. БЕРЕМО ДАНІ КОШИКА ПРЯМО ТУТ
+
   const cart = useCartStore((state) => state.cart);
   const clearCart = useCartStore((state) => state.clearCart);
 
-  // Додай у свій cartStore метод setIsCartOpen(true), якщо його ще немає
-  // Або використовуй те, що в тебе відповідає за відкриття модалки
   const setIsCartOpen = useCartStore((state) => state.setIsCartOpen);
-
-  // Рахуємо кількість товарів
   const cartItemsCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   const isAdmin = user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
@@ -321,7 +316,6 @@ export function Header() {
               )}
             </div>
 
-            {/* 3. ОНОВЛЕНА КНОПКА: Виклич метод відкриття кошика зі свого стору */}
             <button
               className={styles.actionBtn}
               onClick={() => setIsCartOpen(true)}

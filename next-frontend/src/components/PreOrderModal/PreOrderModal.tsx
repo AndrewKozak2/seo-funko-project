@@ -46,11 +46,10 @@ export function PreOrderModal({ isOpen, onClose }: PreOrderModalProps) {
           <X size={24} />
         </button>
 
-        {/* 3. ОПТИМІЗОВАНА КАРТИНКА */}
         <Image
           src="/assets/iron.png"
           alt="Iron Man Figure Pre-order"
-          width={200} // Вкажи приблизний розмір
+          width={200}
           height={200}
           className={styles.image}
         />

@@ -1,7 +1,7 @@
-"use client"; // 1. ГОВОРИМО NEXT.JS, ЩО ЦЕ КЛІЄНТСЬКА СТОРІНКА
+"use client";
 
 import { useState, useEffect } from "react";
-import { CreatePromoModal } from "./CreatePromoModal"; // Лежить в цій же папці
+import { CreatePromoModal } from "./CreatePromoModal";
 import styles from "./AdminPromoCodes.module.css";
 import toast from "react-hot-toast";
 
@@ -17,7 +17,6 @@ export default function AdminPromoCodesPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // 2. ЗМІННА ОТОЧЕННЯ ДЛЯ NEXT.JS
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
   useEffect(() => {
@@ -148,7 +147,6 @@ export default function AdminPromoCodesPage() {
         </table>
       </div>
 
-      {/* 3. МОДАЛКА: Не забудь перевірити її код так само */}
       <CreatePromoModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

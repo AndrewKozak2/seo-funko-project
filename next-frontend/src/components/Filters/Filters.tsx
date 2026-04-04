@@ -18,10 +18,8 @@ export function Filters({
   priceRange,
   onPriceChange,
 }: FiltersProps) {
-  // 1. Локальний стейт для плавної анімації
   const [localPrice, setLocalPrice] = useState<[number, number]>(priceRange);
 
-  // 2. Синхронізуємо локальну ціну, якщо пропси змінилися ззовні (наприклад, кнопка Reset)
   useEffect(() => {
     setLocalPrice(priceRange);
   }, [priceRange]);
@@ -54,11 +52,8 @@ export function Filters({
             range
             min={0}
             max={100}
-            // 3. Використовуємо локальний стейт для значення
             value={localPrice}
-            // 4. onChange міняє тільки локальний стейт (працює миттєво)
             onChange={(val) => setLocalPrice(val as [number, number])}
-            // 5. onAfterChange оновлює URL тільки коли відпустили мишку
             onChangeComplete={(val) => onPriceChange(val as [number, number])}
           />
         </div>

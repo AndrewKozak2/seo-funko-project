@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-// 1. ЗАМІНА: Використовуємо useRouter від Next.js замість react-router-dom
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/authStore";
 import toast from "react-hot-toast";
@@ -25,9 +24,7 @@ export const useAuthFlow = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const login = useAuthStore((state) => state.login);
-  const router = useRouter(); // Ініціалізуємо некстовий роутер
-
-  // 2. КОНСТАНТА: Виносимо apiUrl, щоб не дублювати process.env всюди
+  const router = useRouter();
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
   const handleAuth = async (e: React.FormEvent) => {
@@ -65,7 +62,6 @@ export const useAuthFlow = () => {
       if (authMode === "login") {
         login(data.user, data.token);
         toast.success(`Welcome back, ${data.user.name}!`);
-        // 3. ЗАМІНА: router.push замість navigate
         router.push("/");
       } else {
         toast.success("Verification code sent to your email!");

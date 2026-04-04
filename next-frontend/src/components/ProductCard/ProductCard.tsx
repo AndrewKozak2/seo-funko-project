@@ -48,7 +48,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
         <Image
           src={product.imageUrl}
           alt={product.title}
-          fill // 1. ЗАМІНА: картинка заповнить контейнер
+          fill
           sizes="(max-width: 768px) 100vw, 280px"
           className={styles.image}
         />

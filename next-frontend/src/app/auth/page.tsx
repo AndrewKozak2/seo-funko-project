@@ -1,14 +1,12 @@
-"use client"; // ОБОВ'ЯЗКОВО
+"use client";
 
-import { useRouter } from "next/navigation"; // 1. ЗАМІНА useNavigate
+import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-
-// 2. ІМПОРТИ ФОРМ: за умови, що вони лежать у тій же папці
 import { ForgotPasswordForm } from "./ForgotPasswordForm";
 import { VerifyEmailForm } from "./VerifyEmailForm";
 import { ResetPasswordForm } from "./ResetPasswordForm";
 import { LoginForm } from "./LoginForm";
-import { useAuthFlow } from "./useAuthFlow"; // Твій кастомний хук логіки
+import { useAuthFlow } from "./useAuthFlow";
 
 import styles from "./Auth.module.css";
 
@@ -36,7 +34,6 @@ export default function AuthPage() {
       <div className={styles.orb2}></div>
 
       <div className={styles.authBox}>
-        {/* 3. ЗАМІНА: router.push("/") замість navigate("/") */}
         <button onClick={() => router.push("/")} className={styles.backBtn}>
           <ArrowLeft size={20} /> Back to Store
         </button>
@@ -49,7 +46,6 @@ export default function AuthPage() {
           {authMode === "reset-password" && "Create New Password"}
         </h2>
 
-        {/* Логіка перемикання режимів залишається такою ж */}
         {authMode === "verify" ? (
           <VerifyEmailForm
             email={formData.email}

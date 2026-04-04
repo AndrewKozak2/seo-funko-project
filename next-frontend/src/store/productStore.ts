@@ -1,5 +1,4 @@
 import { create } from "zustand";
-// Використовуємо аліас @/ для чистих імпортів
 import { type FunkoPop } from "@/types/product";
 
 interface ProductState {
@@ -9,8 +8,6 @@ interface ProductState {
   fetchProducts: () => Promise<void>;
 }
 
-// 1. ЗАМІНА: У Next.js використовуємо process.env замість import.meta.env
-// Також додаємо фолбек (запасний варіант) на localhost
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
 export const useProductStore = create<ProductState>((set) => ({
@@ -18,7 +15,6 @@ export const useProductStore = create<ProductState>((set) => ({
   isLoading: false,
   error: null,
   fetchProducts: async () => {
-    // Починаємо завантаження — скидаємо старі помилки
     set({ isLoading: true, error: null });
 
     try {
@@ -29,8 +25,6 @@ export const useProductStore = create<ProductState>((set) => ({
       }
 
       const data = await response.json();
-
-      // Оновлюємо стан: дані прийшли, завантаження закінчено
       set({ products: data, isLoading: false });
     } catch (error) {
       console.error("Error fetching products:", error);

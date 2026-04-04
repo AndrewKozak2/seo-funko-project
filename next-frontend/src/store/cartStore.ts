@@ -4,7 +4,6 @@ import { type CartItem, type FunkoPop } from "../types/product";
 
 interface CartState {
   cart: CartItem[];
-  // 1. Додаємо стан для модалки
   isCartOpen: boolean;
   setIsCartOpen: (isOpen: boolean) => void;
 
@@ -19,7 +18,6 @@ export const useCartStore = create<CartState>()(
   persist(
     (set) => ({
       cart: [],
-      // 2. Початковий стан — закрито
       isCartOpen: false,
       setIsCartOpen: (isOpen) => set({ isCartOpen: isOpen }),
 
@@ -38,7 +36,6 @@ export const useCartStore = create<CartState>()(
               ),
             };
           }
-          // При додаванні товару можна автоматично відкривати кошик:
           return {
             cart: [...state.cart, { product, quantity: 1 }],
           };
@@ -71,8 +68,6 @@ export const useCartStore = create<CartState>()(
     }),
     {
       name: "funko-cart-storage",
-      // 3. ФІШКА: Зберігаємо в localStorage ТІЛЬКИ масив cart.
-      // Стан isCartOpen не зберігаємо, щоб він завжди був false при старті.
       partialize: (state) => ({ cart: state.cart }),
     },
   ),

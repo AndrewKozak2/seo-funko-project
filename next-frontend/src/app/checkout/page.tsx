@@ -1,13 +1,9 @@
-"use client"; // 1. КЛІЄНТСЬКИЙ КОМПОНЕНТ
-
-// 2. ЗАМІНА: useRouter замість useNavigate
+"use client";
 import { useRouter } from "next/navigation";
 import { customStyles } from "./selectStyles";
 import AsyncSelect from "react-select/async";
 import Select from "react-select";
-import Image from "next/image"; // 3. ОПТИМІЗАЦІЯ КАРТИНОК
-
-// 4. ОНОВЛЕННЯ ШЛЯХІВ: Використовуємо аліаси @
+import Image from "next/image";
 import { type City, type Warehouse } from "@/services/novaPoshta";
 import { useCheckout } from "@/hooks/useCheckout";
 import styles from "./Checkout.module.css";
@@ -36,7 +32,6 @@ export default function CheckoutPage() {
     isCheckingPromo,
   } = useCheckout();
 
-  // Якщо кошик порожній
   if (cart.length === 0) {
     return (
       <div
@@ -170,7 +165,6 @@ export default function CheckoutPage() {
           />
         </div>
 
-        {/* Секція Нової Пошти */}
         <div className={styles.inputGroup}>
           <label className={styles.label}>City (Nova Poshta)</label>
           <AsyncSelect
@@ -208,7 +202,6 @@ export default function CheckoutPage() {
           />
         </div>
 
-        {/* Промокоди */}
         <div className={styles.inputGroup}>
           <label className={styles.label}>Promo Code</label>
           <div className={styles.promoFlex}>

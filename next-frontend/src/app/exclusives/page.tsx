@@ -1,7 +1,6 @@
-"use client"; // Це клієнтський компонент
+"use client";
 
 import { useEffect, useMemo } from "react";
-// 1. ПРАВИЛЬНІ ІМПОРТИ: використовуємо @ для всього, що в src
 import { ProductCard } from "@/components/ProductCard/ProductCard";
 import { useProductStore } from "@/store/productStore";
 import { useCartStore } from "@/store/cartStore";
@@ -16,7 +15,6 @@ export default function ExclusivesPage() {
     fetchProducts();
   }, [fetchProducts]);
 
-  // 2. ЛОГІКА ФІЛЬТРАЦІЇ: залишаємо useMemo для продуктивності
   const exclusiveProducts = useMemo(() => {
     return products.filter((product) => product.isExclusive === true);
   }, [products]);

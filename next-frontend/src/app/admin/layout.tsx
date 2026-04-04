@@ -1,7 +1,5 @@
-"use client"; // Обов'язково: localStorage, стейти та ефекти
-
+"use client";
 import React, { useState, useEffect } from "react";
-// 1. ЗАМІНА: Link та usePathname замість NavLink, useRouter замість useNavigate
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -9,13 +7,12 @@ import styles from "./AdminLayout.module.css";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const pathname = usePathname(); // Для визначення активного посилання
+  const pathname = usePathname();
   
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Перевірка сесії при завантаженні
   useEffect(() => {
     const savedKey = localStorage.getItem("adminKey");
     if (savedKey) {
@@ -26,7 +23,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const verifyLogin = async (key: string) => {
     setIsLoading(true);
     try {
-      // 2. ЗАМІНА: process.env для Next.js
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
       const response = await fetch(`${apiUrl}/orders`, {
         method: "GET",
@@ -64,10 +60,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     localStorage.removeItem("adminKey");
     setIsAuthenticated(false);
     setPassword("");
-    router.push("/"); // 3. ЗАМІНА: router.push
+    router.push("/");
   };
 
-  // Гейт авторизації (якщо не залогінений — показуємо форму)
   if (!isAuthenticated) {
     return (
       <div className={styles.loginWrapper}>
@@ -92,7 +87,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     );
   }
 
-  // Функція для перевірки активного посилання (заміна NavLink isActive)
   const getNavLinkClass = (href: string) => {
     return pathname === href 
       ? `${styles.navLink} ${styles.active}` 
@@ -105,7 +99,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <h2 className={styles.logo}>Funko Admin</h2>
 
         <nav className={styles.navMenu}>
-          {/* 4. ЗАМІНА: Link замість NavLink з ручною перевіркою класу */}
           <Link href="/admin/products" className={getNavLinkClass("/admin/products")}>
             Products
           </Link>
@@ -123,7 +116,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </aside>
 
       <main className={styles.mainContent}>
-        {/* 5. ЗАМІНА: children замість Outlet */}
         {children}
       </main>
     </div>

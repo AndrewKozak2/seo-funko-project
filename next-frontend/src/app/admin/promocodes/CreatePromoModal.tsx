@@ -1,4 +1,4 @@
-"use client"; // Обов'язково додаємо для роботи з useEffect та формами
+"use client";
 
 import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -19,7 +19,6 @@ export function CreatePromoModal({
   const [discount, setDiscount] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  // Керування скролом при відкритті модалки
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -39,7 +38,6 @@ export function CreatePromoModal({
 
     setIsLoading(true);
     try {
-      // 1. ЗАМІНА: Використовуємо NEXT_PUBLIC_ змінні оточення
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
       const savedKey = localStorage.getItem("adminKey");
 
@@ -61,7 +59,7 @@ export function CreatePromoModal({
       toast.success("Promo code created!");
       setCode("");
       setDiscount("");
-      onSuccess(data); // Оновлюємо список у батьківському компоненті
+      onSuccess(data);
       onClose();
     } catch (error: any) {
       console.error(error);
@@ -88,7 +86,7 @@ export function CreatePromoModal({
               type="text"
               className={styles.input}
               value={code}
-              onChange={(e) => setCode(e.target.value.toUpperCase())} // Зручно: автоматично робимо капсом
+              onChange={(e) => setCode(e.target.value.toUpperCase())}
               placeholder="Enter code"
               maxLength={15}
               disabled={isLoading}

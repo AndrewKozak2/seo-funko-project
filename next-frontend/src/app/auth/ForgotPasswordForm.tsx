@@ -1,4 +1,4 @@
-"use client"; // 1. ПРАВИЛО: Форма інтерактивна — маємо додати цю директиву
+"use client";
 
 import React from "react";
 import styles from "./Auth.module.css";
@@ -32,10 +32,10 @@ export function ForgotPasswordForm({
           required
           className={styles.input}
           placeholder="your@email.com"
-          autoComplete="email" // 2. UX: Допомагаємо браузеру зрозуміти тип поля
+          autoComplete="email"
           value={email}
           onChange={onChange}
-          disabled={isLoading} // 3. Блокуємо інпут, поки йде відправка листа
+          disabled={isLoading}
         />
       </div>
 

@@ -1,4 +1,4 @@
-"use client"; // 1. ПРАВИЛО: Next.js має знати, що тут є інтерактив
+"use client";
 
 import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
@@ -42,7 +42,7 @@ export function LoginForm({
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
-              disabled={isLoading} // Блокуємо, щоб не було помилок під час фетчу
+              disabled={isLoading}
             />
           </div>
         )}

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { type ProductAdmin } from "./page"; // Імпортуємо тип з сусіднього файлу
+import { type ProductAdmin } from "./page";
 import styles from "./CreateProductModal.module.css";
 import toast from "react-hot-toast";
 
@@ -42,7 +42,6 @@ export function CreateProductModal({
     isBundle: false,
   });
 
-  // Очистка пам'яті для прев'ю картинок (Senior-фішка)
   useEffect(() => {
     return () => {
       if (imagePreview) URL.revokeObjectURL(imagePreview);

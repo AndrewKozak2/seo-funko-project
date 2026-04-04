@@ -1,7 +1,6 @@
-"use client"; // 1. ПРАВИЛО: Додаємо, бо компонент інтерактивний
-
+"use client";
 import React from "react";
-import styles from "./Auth.module.css"; // Переконайся, що шлях вірний
+import styles from "./Auth.module.css";
 
 interface VerifyEmailFormProps {
   email: string;
@@ -34,12 +33,12 @@ export function VerifyEmailForm({
             type="text"
             maxLength={1}
             value={digit}
-            autoComplete="one-time-code" // 2. ПІДКАЗКА: Допомагає мобільним девайсам підтягнути код з СМС/Пошти
+            autoComplete="one-time-code"
             onChange={(e) => onOtpChange(index, e.target.value)}
             onKeyDown={(e) => onKeyDown(index, e)}
             className={styles.otpInput}
             required
-            disabled={isLoading} // 3. UX: Блокуємо інпути під час перевірки
+            disabled={isLoading}
           />
         ))}
       </div>

@@ -1,5 +1,4 @@
-// МИ НЕ ПИШЕМО "use client", щоб цей компонент був SSR-ним
-import Link from "next/link"; // 1. ЗАМІНА: для швидкої навігації без перезавантаження
+import Link from "next/link";
 //import { Instagram, Twitter, Facebook, Github } from "lucide-react";
 import styles from "./Footer.module.css";
 
@@ -29,7 +28,6 @@ export function Footer() {
             <h4>Shop</h4>
             <ul>
               <li>
-                {/* 2. ЗАМІНА: href замість посилань-заглушок */}
                 <Link href="/figures">All Figures</Link>
               </li>
               <li>
@@ -65,7 +63,6 @@ export function Footer() {
 
         <div className={styles.copyright}>
           <p>
-            {/* 3. МАГІЯ: Це виконається на СЕРВЕРІ в момент запиту */}©{" "}
             {new Date().getFullYear()} Funko Pop Store. All rights reserved.
           </p>
         </div>

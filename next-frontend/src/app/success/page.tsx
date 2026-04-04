@@ -1,7 +1,6 @@
-"use client"; // Обов'язково, бо використовуємо хуки навігації
+"use client";
 
 import { useEffect } from "react";
-// 1. ЗАМІНА: Нові хуки від Next.js
 import { useRouter, useSearchParams } from "next/navigation";
 import { CheckCircle } from "lucide-react";
 import styles from "./Success.module.css";
@@ -9,12 +8,9 @@ import styles from "./Success.module.css";
 export default function SuccessPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-
-  // 2. ЗАМІНА: Отримуємо дані з URL-рядка
   const orderId = searchParams.get("orderId");
   const total = searchParams.get("total");
 
-  // 3. ЛОГІКА ЗАХИСТУ: Якщо людина просто зайшла на /success без замовлення — викидаємо
   useEffect(() => {
     if (!orderId) {
       router.replace("/");
@@ -22,7 +18,7 @@ export default function SuccessPage() {
   }, [orderId, router]);
 
   if (!orderId) {
-    return null; // Поки йде редирект, нічого не рендеримо
+    return null;
   }
 
   return (
@@ -43,7 +39,6 @@ export default function SuccessPage() {
           </div>
         </div>
 
-        {/* 4. ЗАМІНА: router.push для повернення до магазину */}
         <button onClick={() => router.push("/")} className={styles.homeBtn}>
           Back to Store
         </button>

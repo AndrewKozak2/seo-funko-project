@@ -1,4 +1,4 @@
-"use client"; // 1. ПРАВИЛО: Використовуємо стейти, ефекти та localStorage
+"use client";
 
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -20,7 +20,6 @@ interface Order {
 export default function AdminOrdersPage() {
   const [orders, setOrders] = useState<Order[]>([]);
 
-  // 2. КОНСТАНТА: Використовуємо NEXT_PUBLIC_ префікс
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
   useEffect(() => {

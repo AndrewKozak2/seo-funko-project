@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-import { CreateProductModal } from "./CreateProductModal"; // Переконайся, що цей файл лежить поруч
+import { CreateProductModal } from "./CreateProductModal";
 import styles from "./AdminProducts.module.css";
 
 export interface ProductAdmin {
@@ -70,8 +70,6 @@ export default function AdminProductsPage() {
       });
 
       if (!response.ok) throw new Error("Failed to delete product");
-
-      // Оновлюємо стейт, видаляючи товар за його id
       setAdminProducts((prev) => prev.filter((p) => p.id !== idToDelete));
       toast.success("Product deleted successfully");
     } catch (error) {

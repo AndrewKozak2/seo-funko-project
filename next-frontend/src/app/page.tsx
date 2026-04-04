@@ -1,15 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
-// 1. ЗАМІНА: Нові хуки від Next.js
 import { usePathname, useSearchParams } from "next/navigation";
-
 import { Hero } from "@/components/Hero/Hero";
 import { Filters } from "@/components/Filters/Filters";
 import { ProductCard } from "@/components/ProductCard/ProductCard";
 import { Newsletter } from "@/components/Newsletter/Newsletter";
-
-// 2. ОНОВЛЕННЯ ШЛЯХІВ: @ веде в папку src
 import { useCartStore } from "@/store/cartStore";
 import { useProductStore } from "@/store/productStore";
 import { useShop } from "@/hooks/useShop";
@@ -21,7 +17,6 @@ export default function ShopPage() {
 
   const { products, totalCount, visibleCount, filters, actions } = useShop();
 
-  // 3. ЗАМІНА useLocation
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -29,27 +24,20 @@ export default function ShopPage() {
     fetchProducts();
   }, [fetchProducts]);
 
-  // 4. ЛОГІКА СКРОЛУ ТА ХЕШІВ
-  // 4. ЛОГІКА СКРОЛУ ТА ХЕШІВ
   useEffect(() => {
-    // 1. Перевіряємо, чи є в URL хеш (наприклад, #figures)
     const hash = window.location.hash;
 
     if (hash) {
       const id = hash.replace("#", "");
       const element = document.getElementById(id);
       if (element) {
-        // Якщо є хеш — плавно скролимо до нього
         element.scrollIntoView({ behavior: "smooth" });
-        return; // Виходимо, щоб не спрацював scrollTo(0) нижче
+        return;
       }
     }
 
-    // 2. Якщо хешу немає — скролимо вгору, АЛЕ тільки при зміні сторінки (pathname)
-    // Оскільки ми прибрали searchParams із залежностей, цей код НЕ буде
-    // спрацьовувати, коли ти просто крутиш бігунок ціни.
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [pathname]); // <--- ЗАЛИШАЄМО ТІЛЬКИ PATHNAME
+  }, [pathname]);
 
   if (isLoading) {
     return (

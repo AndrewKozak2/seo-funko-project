@@ -1,10 +1,6 @@
-"use client"; // ОБОВ'ЯЗКОВО: тут ми працюємо з localStorage (через Zustand) та window.confirm
-
-// 1. ЗАМІНА: Імпортуємо Link з next/link
+"use client";
 import Link from "next/link";
 import { Trash2, HeartOff } from "lucide-react";
-
-// 2. ОНОВЛЕННЯ ШЛЯХІВ: Використовуй аліас @, щоб не писати "../../"
 import { useWishlistStore } from "@/store/wishlistStore";
 import { useCartStore } from "@/store/cartStore";
 import { ProductCard } from "@/components/ProductCard/ProductCard";
@@ -17,7 +13,6 @@ export default function WishlistPage() {
   const addToCart = useCartStore((state) => state.addToCart);
 
   const handleClearAll = () => {
-    // window.confirm працює, бо ми в "use client"
     if (window.confirm("Are you sure want to clear your wishlist?")) {
       clearWishlist();
       toast.success("Wishlist cleared");
@@ -31,7 +26,6 @@ export default function WishlistPage() {
           <HeartOff size={64} color="#334155" />
           <h2 className={styles.emptyTitle}>Your wishlist is empty</h2>
           <p>Seems like you haven't found your favorite Funkos yet</p>
-          {/* 3. ЗАМІНА: href замість to */}
           <Link href="/" className={styles.backLink}>
             Start Shopping
           </Link>

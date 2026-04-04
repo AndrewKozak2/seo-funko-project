@@ -208,7 +208,6 @@
   gap: 10px;
 }
 
-/* Анімації */
 @keyframes fadeIn {
   from {
     opacity: 0;

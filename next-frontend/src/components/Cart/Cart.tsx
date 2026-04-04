@@ -6,9 +6,7 @@ import { useRouter } from "next/navigation";
 import { X, Minus, Plus, Trash2, ShoppingBag, CreditCard } from "lucide-react";
 import styles from "./Cart.module.css";
 
-// 1. ПРИБИРАЄМО INTERFACE PROPS — тепер ми незалежні!
 export function Cart() {
-  // 2. БЕРЕМО СТАН ВІДКРИТТЯ ТА ФУНКЦІЮ ЗАКРИТТЯ ЗІ СТОРУ
   const isCartOpen = useCartStore((state) => state.isCartOpen);
   const setIsCartOpen = useCartStore((state) => state.setIsCartOpen);
 
@@ -23,7 +21,6 @@ export function Cart() {
     .reduce((sum, item) => sum + item.product.price * item.quantity, 0)
     .toFixed(2);
 
-  // Блокування скролу
   useEffect(() => {
     if (isCartOpen) {
       document.body.style.overflow = "hidden";
@@ -35,12 +32,12 @@ export function Cart() {
     };
   }, [isCartOpen]);
 
-  // Закриття по Escape
+
   useEffect(() => {
     if (!isCartOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setIsCartOpen(false); // Використовуємо функцію зі стору
+        setIsCartOpen(false);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -48,10 +45,6 @@ export function Cart() {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isCartOpen, setIsCartOpen]);
-
-  // Якщо кошик закритий, ми все одно рендеримо верстку,
-  // бо анімація в CSS (styles.containerOpen) зазвичай на це розрахована.
-  // Але якщо анімації немає, можна просто робити return null якщо !isCartOpen.
 
   return (
     <>

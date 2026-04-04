@@ -81,7 +81,6 @@
   color: #00f6ff;
 }
 
-/* Керуємо нутрощами слайдера через глобальні селектори всередині нашого контейнера */
 .priceSliderContainer :global(.rc-slider-track) {
   background-color: #00f6ff;
   box-shadow: 0 0 10px rgba(0, 246, 255, 0.5);

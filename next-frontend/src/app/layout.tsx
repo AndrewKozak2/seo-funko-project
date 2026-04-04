@@ -1,6 +1,7 @@
+import { Suspense } from "react";
 import { Header } from "@/components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
-import { Cart } from "@/components/Cart/Cart"; // 1. Імпортуй кошик
+import { Cart } from "@/components/Cart/Cart";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
@@ -13,7 +14,9 @@ export default function RootLayout({
     <html lang="uk" data-scroll-behavior="smooth">
       <body>
         <Toaster />
-        <Header />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Header />
+        </Suspense>
         <Cart />
 
         <main>{children}</main>

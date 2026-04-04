@@ -1,4 +1,4 @@
-"use client"; // Обов'язково для роботи onClick та toast у Next.js
+"use client";
 
 import Image from "next/image";
 import toast from "react-hot-toast";
@@ -16,7 +16,6 @@ export function BundleCard({ bundle, onAddToCart }: BundleCardProps) {
       <span className={styles.bundleBadge}>COMBO DEAL</span>
 
       <div className={styles.imagesContainer}>
-        {/* Next.js вимагає width та height для оптимізації */}
         <Image
           src={bundle.bundleImages?.[0] || "/placeholder.jpg"}
           alt="Figure 1"

@@ -1,7 +1,6 @@
-"use client"; // 1. ПОВІДОМЛЯЄМО NEXT.JS, ЩО ЦЕ КЛІЄНТСЬКА СТОРІНКА
+"use client";
 
 import { useEffect, useState } from "react";
-// 2. ЗАМІНА: useRouter замість useNavigate
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/authStore";
 import { useCartStore } from "@/store/cartStore";
@@ -42,7 +41,6 @@ export default function ProfilePage() {
 
   const clearCart = useCartStore((state) => state.clearCart);
 
-  // Захист роута: якщо не авторизований — на вхід
   useEffect(() => {
     if (!user) {
       router.push("/auth");
@@ -54,7 +52,6 @@ export default function ProfilePage() {
 
     const fetchMyOrders = async () => {
       try {
-        // 3. ЗАМІНА: process.env замість import.meta.env
         const apiUrl =
           process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
         const response = await fetch(`${apiUrl}/orders/user/${user.email}`);
@@ -138,7 +135,6 @@ export default function ProfilePage() {
 
   return (
     <div className={styles.wrapper}>
-      {/* ... весь твій JSX залишається без змін, бо ми зберегли назви стилів ... */}
       <div className={styles.profileBox}>
         <h2 className={styles.title}>Profile</h2>
 
