@@ -1,8 +1,12 @@
+"use client";
+
 import Link from "next/link";
 //import { Instagram, Twitter, Facebook, Github } from "lucide-react";
 import styles from "./Footer.module.css";
+import { usePathname } from "next/navigation";
+import { Suspense } from "react";
 
-export function Footer() {
+export function FooterContent() {
   return (
     <footer className={styles.footer}>
       <div className="container">
@@ -17,7 +21,7 @@ export function Footer() {
             </p>
             <div className={styles.socials}>
               {/* Тут можна теж обгорнути в <Link>, якщо це реальні профілі */}
-   {  /*         <Instagram size={24} className={styles.icon} />
+              {/*         <Instagram size={24} className={styles.icon} />
               <Twitter size={24} className={styles.icon} />
               <Facebook size={24} className={styles.icon} />
               <Github size={24} className={styles.icon} />*/}
@@ -68,5 +72,24 @@ export function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+export function Footer() {
+  const pathname = usePathname();
+
+  if (pathname === "/auth") {
+    return null;
+  }
+
+  return (
+    <Suspense
+      fallback={
+        <header className={styles.headerWrapper}>
+          <div className="container">Loading...</div>
+        </header>
+      }
+    >
+      <FooterContent />
+    </Suspense>
   );
 }

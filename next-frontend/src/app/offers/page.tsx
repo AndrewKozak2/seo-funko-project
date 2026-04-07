@@ -43,7 +43,9 @@ export default function OffersPage() {
             />
           ))
         ) : (
-          <h3 style={{ color: "#94a3b8" }}>No offers available right now.</h3>
+          <div className={styles.loadingWrapper}>
+            <h2>No offers available right now.</h2>
+          </div>
         )}
       </div>
     </div>

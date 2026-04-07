@@ -23,6 +23,13 @@
   letter-spacing: 2px;
 }
 
+.loadingWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
 .emptyState {
   text-align: center;
   padding: 80px 20px;

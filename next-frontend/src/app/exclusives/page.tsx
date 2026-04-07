@@ -21,7 +21,7 @@ export default function ExclusivesPage() {
 
   if (isLoading) {
     return (
-      <div className={styles.loaderWrapper}>
+      <div className={styles.loadingWrapper}>
         <h2>Loading Exclusives...</h2>
       </div>
     );

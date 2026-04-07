@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect, Suspense } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import Link from "next/link";
 import {
   ShoppingCart,
@@ -18,7 +18,7 @@ import { useAuthStore } from "@/store/authStore";
 import { useCartStore } from "@/store/cartStore";
 import styles from "./Header.module.css";
 
-export function Header() {
+export function HeaderContent() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [allCollections, setAllCollections] = useState<string[]>([]);
@@ -27,13 +27,17 @@ export function Header() {
 
   const searchParams = useSearchParams();
   const router = useRouter();
+  const pathname = usePathname();
+
+  const isAuthPage = pathname === "/auth";
+
+  if (isAuthPage) return null;
 
   const [localSearch, setLocalSearch] = useState(
     searchParams.get("search") || "",
   );
 
   const { user, logout } = useAuthStore();
-
 
   const cart = useCartStore((state) => state.cart);
   const clearCart = useCartStore((state) => state.clearCart);
@@ -124,7 +128,7 @@ export function Header() {
         <div className={styles.headerContent}>
           <Link className={styles.logoLink} href="/">
             <h1 className={styles.logo}>
-              <span className={styles.brandAccent}>Funko</span> Pop Store
+              <span className={styles.brandAccent}>Pop</span> collectors
             </h1>
           </Link>
 
@@ -329,5 +333,25 @@ export function Header() {
         </div>
       </div>
     </header>
+  );
+}
+
+export function Header() {
+  const pathname = usePathname();
+
+  if (pathname === "/auth") {
+    return null;
+  }
+
+  return (
+    <Suspense
+      fallback={
+        <header className={styles.headerWrapper}>
+          <div className="container">Loading...</div>
+        </header>
+      }
+    >
+      <HeaderContent />
+    </Suspense>
   );
 }
