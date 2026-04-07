@@ -61,6 +61,7 @@ export function FooterContent() {
               <li>
                 <Link href="/contact">Contact Us</Link>
               </li>
+              <Link href="/articles">Blog</Link>
             </ul>
           </div>
         </div>

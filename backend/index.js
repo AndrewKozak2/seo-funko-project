@@ -7,6 +7,7 @@ const promoRoutes = require("./routes/promoRoutes");
 const productRoutes = require("./routes/productRoutes");
 const authRoutes = require("./routes/authRoutes");
 const uploadRoutes = require("./routes/uploadRoutes");
+const authorRoutes = require("./routes/authorRoutes");
 
 dotenv.config();
 
@@ -18,7 +19,7 @@ app.use("/products", productRoutes);
 app.use("/orders", orderRoutes);
 app.use("/promocodes", promoRoutes);
 app.use("/auth", authRoutes);
-
+app.use("/authors", authorRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI)

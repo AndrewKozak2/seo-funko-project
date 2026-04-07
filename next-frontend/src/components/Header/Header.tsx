@@ -145,6 +145,9 @@ export function HeaderContent() {
             <Link href="/offers" className={styles.navLink}>
               Offers
             </Link>
+            <Link href="/about" className={styles.navLink}>
+              About Us
+            </Link>
           </nav>
 
           <button
@@ -173,6 +176,9 @@ export function HeaderContent() {
               </Link>
               <Link href="/wishlist" onClick={() => setIsMobileMenuOpen(false)}>
                 Wishlist
+              </Link>
+              <Link href="/about" onClick={() => setIsMobileMenuOpen(false)}>
+                About Us
               </Link>
               {user ? (
                 <button
