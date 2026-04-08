@@ -11,7 +11,7 @@ https://pop-collectors.pp.ua/
 
 ## 3. Скріншот успішного deploy на Railway
 
-![скриншот](1.png)
+<img src="screen1.png" width="500">
 
 ## 4. Вміст файлу curl-result.txt
 
@@ -30,7 +30,7 @@ https://pop-collectors.pp.ua/
 
 ## 6. Скріншот верифікації в Google Search Console
 
-![скриншот](1.png)
+<img src="screen2.png" width="500">
 
 Знайти в отриманому HTML та заповнити таблицю:
 
