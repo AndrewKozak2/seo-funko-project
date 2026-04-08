@@ -1,0 +1,146 @@
+/* Contact.module.css */
+
+.contactWrapper {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 0 20px;
+  color: #e2e8f0;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.title {
+  font-size: 3rem;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #94a3b8;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Контейнер для двох колонок */
+.content {
+  display: flex;
+  gap: 40px;
+  background-color: #1e293b; /* Твій фірмовий темний фон */
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Ліва частина (Інформація) --- */
+.infoSection {
+  flex: 1; /* Займає 1 частину вільного простору */
+  padding-right: 40px;
+  border-right: 1px solid #334155; /* Роздільна лінія між колонками */
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  color: #00f6ff; /* Неоновий акцент */
+  margin-bottom: 30px;
+}
+
+.infoBlock {
+  margin-bottom: 25px;
+}
+
+.infoBlock h3 {
+  font-size: 1.1rem;
+  color: #f8fafc;
+  margin: 0 0 8px 0;
+}
+
+.infoBlock p {
+  color: #cbd5e1;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* --- Права частина (Форма) --- */
+.formSection {
+  flex: 1.5; /* Займає трохи більше місця (1.5 частини) */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputGroup label {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+}
+
+.inputGroup input,
+.inputGroup textarea {
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #ffffff;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+  font-family: inherit;
+}
+
+.inputGroup input:focus,
+.inputGroup textarea:focus {
+  border-color: #00f6ff; /* Підсвічування при введенні тексту */
+}
+
+.submitBtn {
+  background-color: #00f6ff;
+  color: #0f172a;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.submitBtn:hover {
+  background-color: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 246, 255, 0.4);
+}
+
+.successMessage {
+  text-align: center;
+  padding: 40px 20px;
+  color: #00f6ff;
+}
+
+/* Адаптивність для мобільних пристроїв */
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column; /* Ставимо колонки одну над одною */
+    padding: 20px;
+  }
+
+  .infoSection {
+    border-right: none;
+    border-bottom: 1px solid #334155;
+    padding-right: 0;
+    padding-bottom: 30px;
+    margin-bottom: 10px;
+  }
+}
