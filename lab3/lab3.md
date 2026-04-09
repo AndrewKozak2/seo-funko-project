@@ -11,22 +11,17 @@
 
 ## 1. Класифікація типів пошукових запитів
 
-**1.1 та 1.2 - Семантичне ядро та класифікація інтенту**
-Зібрано понад 40 цільових пошукових запитів, які було класифіковано за чотирма типами інтенту (Informational, Navigational, Transactional, Commercial). Усі дані оформлені в Google Sheets.
+**1.1 - Класифікація інтенту**
+Зібрано 40 цільових пошукових запитів, які було класифіковано за чотирма типами інтенту (Informational, Navigational, Transactional, Commercial). Усі дані оформлені в Google Sheets.
 
 👉 **[Посилання на Google Sheets (Аркуш "Keywords")](https://docs.google.com/spreadsheets/d/10dWrcG2_xBsSTDZbcCyjcSSnTZ1aZCG1xmicMolMGRo/edit?gid=0#gid=0)**
 
-**1.3 - Аналіз через Google Search**
+**1.2 - Аналіз через Google Search**
 Результати ручного аналізу видачі Google (People also ask, Related searches, Autocomplete) для трьох ключових запитів ("як відрізнити оригінал фанко поп", "ціна на лімітовані фігурки фанко поп", "догляд за вініловими фігурками") зафіксовані та враховані при складанні ядра. Деталі знаходяться у Google Sheets.
 
----
+👉 **[Посилання на Google Sheets (Аркуш "Аналіз через Google Search")](https://docs.google.com/spreadsheets/d/10dWrcG2_xBsSTDZbcCyjcSSnTZ1aZCG1xmicMolMGRo/edit?gid=831334052#gid=831334052)**
 
-## 2. Збір семантичного ядра
-
-**2.1 - Структура таблиці**
-Створено зведену таблицю з частотністю, рівнем конкуренції, прив'язкою до кластерів та пріоритетом впровадження.
-
-**2.2 - Збір через Google Keyword Planner**
+**1.3 - Збір через Google Keyword Planner**
 Було використано інструмент Google Keyword Planner для пошуку нових ідей та збору "сирих" ключових слів (регіон: Україна).
 
 ![Скріншот Google Keyword Planner](ВСТАВ_СЮДИ_НАЗВУ_АБО_ПОСИЛАННЯ_НА_КАРТИНКУ.png)
