@@ -18,7 +18,7 @@ https://pop-collectors.pp.ua/
 
 [Натисни сюди, щоб відкрити мій txt файл](curl-result.txt)
 
-## 5. Порівняльна таблиця: curl vs View Source vs DevTools
+## 5. Аналіз результату
 
 Знайти в отриманому HTML та заповнити таблицю:
 
