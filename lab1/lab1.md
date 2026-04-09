@@ -26,7 +26,7 @@ https://pop-collectors.pp.ua/
 |-----------------------------|-----------|----------------------------------------|
 | Текст статей                |    Так    | У SSR HTML є назви й описи постів      |
 | `<title>`                   |    Так    | Funko Pop Store  |
-| `<meta name="description">` |    Так    | Tech blog with articles cybersecurity  |
+| `<meta name="description">` |    Так    | The ultimate destination for Funko Pop collectors. Shop exclusive Marvel, Formula 1, and Anime figures. Fast shipping and great deals! |
 | Вміст `<body>`              |    Так    | Попередньо відрендерений список постів, навігація, контент головної сторінки та JSON-стан __REACT_QUERY_STATE__.
           
 
