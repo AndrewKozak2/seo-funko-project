@@ -90,8 +90,39 @@ H1: Pop collectors (Головний ключ)
 | зображення 2 |Ayrton Senna (Lotus)|PNG| 85 КБ|Ayrton Senna Lotus 97T Funko Pop Formula 1 Figure|                   WebP|
 | зображення 3 |Max Verstappen with RB20| PNG|312 КБ |Max Verstappen Red Bull RB20 Funko Pop Collectible|                    WebP|
 
+<img src="screen2.png" width = 500>
 
-6. JSON-LD розмітка + скріншот Rich Results Test (п.1.5)
+
+## 5. JSON-LD розмітка + скріншот Rich Results Test 
+Для покращення представлення сайту у пошуковій видачі (створення розширеного сніпета) було розроблено мікророзмітку у форматі JSON-LD. Обрано тип Product, оскільки на сторінці представлено конкретний товар з ціною та наявністю.
+
+```json
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "Iron Man Funko Pop Figure - Limited Edition",
+  "image": [
+    "https://pop-collectors.pp.ua/_next/image?url=%2Fassets%2Firon.png&w=1200&q=75"
+   ],
+  "description": "Exclusive Iron Man Funko Pop figure. A must-have for Marvel collectors. Limited edition with high detail and premium packaging.",
+  "sku": "FP-IM-LE-001",
+  "brand": {
+    "@type": "Brand",
+    "name": "Funko"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://pop-collectors.pp.ua/",
+    "priceCurrency": "USD",
+    "price": "14.99",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition"
+  }
+}
+```
+
+
+
 7. Аналіз конкурентів (п.2.2)
 8. SEO-текст мінімум 400 слів + таблиця вимог (п.2.3–2.4)
 9. Таблиця Core Web Vitals + скріншот PageSpeed Insights (п.3.1)
