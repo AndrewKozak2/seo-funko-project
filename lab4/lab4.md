@@ -18,7 +18,7 @@ URL-структуру, писати SEO-текст для реальної ау
 | `H1`               |Pop collectors (лого) та IRON MAN POP (Hero)| Ні          |Дублювання H1.|
 | Кількість H2       |3 (Cart, Filter, Funko's Newsletter)|  Ні |H2 використано для системних назв, а не для контенту.|
 | URL                |https://pop-collectors.pp.ua| Так          |нижній регістр, без зайвих параметрів.|
-| Alt у зображень    | Частково заповнені| Ні          | Не всі зображення товарів мають описовий Alt.|
+| Alt у зображень    | є| так| Всі зображення товарів мають описовий Alt.|
 | Schema.org         |  відсутня             |  Ні          | Пошукові системи не отримують структурованих даних про товари (ціна, наявність), що унеможливлює відображення розширених сніпетів у видачі.|
 | Canonical          |  відсутній            |  Ні          | Не визначено пріоритетну версію сторінки, що створює ризик появи дублів та розпилення посилальної ваги.|
 
@@ -65,9 +65,32 @@ Enjoy fast shipping and best prices. Order now and grow your collection!
 
 **Поточна структура (Before):**
 На скріншоті нижче зафіксовано поточний стан заголовків.
+<img src="screen1.png" width = 300>
+
+**Оптимізована структура (After):**
+```
+H1: Pop collectors (Головний ключ)
+  H2: Featured: Iron Man Limited Edition (Акційний товар)
+  H2: Shop Funko Pop Collections (Заголовок каталогу)
+    H3: Ayrton Senna (Lotus)
+    H3: Max Verstappen with RB20
+    H3: Spider-Man Premium Figure
+  H2: Filters & Search (Блок навігації)
+  H2: Join Our Community (Футер)
+    H3: Newsletter Subscription
+```
+У заголовки H2 закладено середньочастотні запити («Funko Pop Collection», «Limited Edition»), а в H3 — низькочастотні назви конкретних героїв та франшиз («Iron Man», «Marvel», «Formula 1»), що дозволяє сторінці охоплювати максимально широкий спектр цільового трафіку.
 
 
-5. Таблиця оптимізації зображень + скріншот Squoosh (п.1.4)
+## 4. Таблиця оптимізації зображень + скріншот Squoosh
+
+| Зображення   | Поточний alt | Поточний формат | Розмір файлу | Оптимізований alt | Рекомендований формат |
+|--------------|--------------|-----------------|--------------|-------------------|-----------------------|
+| зображення 1 |Iron Man Pop Figure Limited Edition|PNG| 450 КБ | Iron Man Funko Pop Figure Limited Edition Collectible|WebP|
+| зображення 2 |Ayrton Senna (Lotus)|PNG| PNG	215 КБ|Ayrton Senna Lotus 97T Funko Pop Formula 1 Figure|                   WebP|
+| зображення 3 |Max Verstappen with RB20| PNG|238 КБ |Max Verstappen Red Bull RB20 Funko Pop Collectible|                    WebP|
+
+
 6. JSON-LD розмітка + скріншот Rich Results Test (п.1.5)
 7. Аналіз конкурентів (п.2.2)
 8. SEO-текст мінімум 400 слів + таблиця вимог (п.2.3–2.4)
