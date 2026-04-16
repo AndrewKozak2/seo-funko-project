@@ -86,9 +86,9 @@ H1: Pop collectors (Головний ключ)
 
 | Зображення   | Поточний alt | Поточний формат | Розмір файлу | Оптимізований alt | Рекомендований формат |
 |--------------|--------------|-----------------|--------------|-------------------|-----------------------|
-| зображення 1 |Iron Man Pop Figure Limited Edition|PNG| 450 КБ | Iron Man Funko Pop Figure Limited Edition Collectible|WebP|
-| зображення 2 |Ayrton Senna (Lotus)|PNG| PNG	215 КБ|Ayrton Senna Lotus 97T Funko Pop Formula 1 Figure|                   WebP|
-| зображення 3 |Max Verstappen with RB20| PNG|238 КБ |Max Verstappen Red Bull RB20 Funko Pop Collectible|                    WebP|
+| зображення 1 |Iron Man Pop Figure Limited Edition|PNG| 369 КБ | Iron Man Funko Pop Figure Limited Edition Collectible|WebP|
+| зображення 2 |Ayrton Senna (Lotus)|PNG| 85 КБ|Ayrton Senna Lotus 97T Funko Pop Formula 1 Figure|                   WebP|
+| зображення 3 |Max Verstappen with RB20| PNG|312 КБ |Max Verstappen Red Bull RB20 Funko Pop Collectible|                    WebP|
 
 
 6. JSON-LD розмітка + скріншот Rich Results Test (п.1.5)
